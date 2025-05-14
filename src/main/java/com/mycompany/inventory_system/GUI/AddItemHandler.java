@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.inventory_system.GUI;
+import com.mycompany.inventory_system.Tools.*;
 
 /**
  *

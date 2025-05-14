@@ -99,6 +99,7 @@ public class ProductDashboard extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(90, 78, 160));
 
+        jTable1.setBackground(new java.awt.Color(200, 172, 214));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
