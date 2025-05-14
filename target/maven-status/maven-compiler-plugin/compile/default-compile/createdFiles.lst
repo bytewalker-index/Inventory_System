@@ -1,3 +1,4 @@
+com\mycompany\inventory_system\GUI\ProductDashboard$4.class
 com\mycompany\inventory_system\GUI\AddItemHandler.class
 com\mycompany\inventory_system\Tools\RoundedButton.class
 com\mycompany\inventory_system\GUI\LoginForm.class
@@ -9,6 +10,7 @@ com\mycompany\inventory_system\GUI\LoginForm$1.class
 com\mycompany\inventory_system\GUI\ProductDashboard$1.class
 com\mycompany\inventory_system\GUI\AddItemHandler$2.class
 com\mycompany\inventory_system\GUI\LoginForm$2.class
+com\mycompany\inventory_system\Functionalities\CheckUserlogin.class
 com\mycompany\inventory_system\Tools\RoundedTextField.class
 com\mycompany\inventory_system\GUI\ProductDashboard$2.class
 com\mycompany\inventory_system\GUI\ProductDashboard$3.class

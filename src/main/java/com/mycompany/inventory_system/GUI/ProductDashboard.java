@@ -6,6 +6,7 @@ package com.mycompany.inventory_system.GUI;
 import com.mycompany.inventory_system.Tools.RoundedButton;
 import com.mycompany.inventory_system.Tools.RoundedTextField;
 import com.mycompany.inventory_system.Tools.RoundedPanel;
+import com.mycompany.inventory_system.GUI.*;
 /**
  *
  * @author paul
@@ -31,7 +32,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new RoundedPanel(30);
         jButton1 = new RoundedButton("Products",30);
-        jButton2 = new RoundedButton("Add Products",30);
+        addproductButton = new RoundedButton("Add Products",30);
         jButton3 = new RoundedButton("Strock Tracking",30);
         jButton4 = new RoundedButton("Transactions",30);
         jButton5 = new RoundedButton("Reports & Logs",30);
@@ -50,8 +51,13 @@ public class ProductDashboard extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(200, 172, 214));
         jButton1.setText("Products");
 
-        jButton2.setBackground(new java.awt.Color(200, 172, 214));
-        jButton2.setText("Add Product");
+        addproductButton.setBackground(new java.awt.Color(200, 172, 214));
+        addproductButton.setText("Add Product");
+        addproductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addproductButtonActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(200, 172, 214));
         jButton3.setText("Stock Tracking");
@@ -76,7 +82,7 @@ public class ProductDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addproductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
@@ -87,7 +93,7 @@ public class ProductDashboard extends javax.swing.JFrame {
                 .addGap(139, 139, 139)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(addproductButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,6 +201,12 @@ public class ProductDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void addproductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addproductButtonActionPerformed
+       
+        AddItemHandler addItemGui = new AddItemHandler();
+        addItemGui.show();
+    }//GEN-LAST:event_addproductButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,8 +243,8 @@ public class ProductDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addproductButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
