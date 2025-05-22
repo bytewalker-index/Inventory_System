@@ -3,23 +3,68 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.inventory_system.GUI;
+import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.RoundedButton;
 import com.mycompany.inventory_system.Tools.RoundedTextField;
 import com.mycompany.inventory_system.Tools.RoundedPanel;
-import com.mycompany.inventory_system.GUI.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 /**
  *
  * @author paul
  */
 public class ProductDashboard extends javax.swing.JFrame {
-
+   public static String username;
     /**
      * Creates new form ProductDashboard
      */
     public ProductDashboard() {
         initComponents();
+        username_label.setText("Username : " + username);
+        this.addWindowListener(new WindowListener() {
+           @Override 
+            public void windowOpened(WindowEvent e) {
+                
+            }
+            
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ProductDashboard.this.SaveAccountFile();
+            }
+            @Override
+            public void windowClosed(WindowEvent e) {
+                
+            }
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                
+            }
+            @Override
+            public void windowActivated(WindowEvent e) {
+                
+            }
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {
+                
+            }
+        });
+    }
+    
+    @Override
+    public void dispose() {
+        super.dispose();
+                SaveAccountFile();
     }
 
+    private void SaveAccountFile() {
+      // System.out.println(AccountHandler.db_path);
+      AccountHandler.SaveFile();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,11 +76,13 @@ public class ProductDashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new RoundedPanel(30);
-        jButton1 = new javax.swing.JButton();
+        Logou = new javax.swing.JButton();
         addproductButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        username_label = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new RoundedPanel(30);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -53,10 +100,15 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(80, 200, 120));
-        jButton1.setForeground(new java.awt.Color(230, 230, 230));
-        jButton1.setText("Products");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 139, 111, -1));
+        Logou.setBackground(new java.awt.Color(80, 200, 120));
+        Logou.setForeground(new java.awt.Color(230, 230, 230));
+        Logou.setText("Logout");
+        Logou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogouActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Logou, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 111, -1));
 
         addproductButton.setBackground(new java.awt.Color(80, 200, 120));
         addproductButton.setForeground(new java.awt.Color(230, 230, 230));
@@ -90,6 +142,14 @@ public class ProductDashboard extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 279, 110, -1));
+
+        username_label.setText("Username: ");
+        jPanel2.add(username_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jButton2.setBackground(new java.awt.Color(80, 200, 120));
+        jButton2.setForeground(new java.awt.Color(230, 230, 230));
+        jButton2.setText("Products");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 139, 111, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 160, 480));
 
@@ -155,9 +215,17 @@ public class ProductDashboard extends javax.swing.JFrame {
 
     private void addproductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addproductButtonActionPerformed
        
-        AddItemHandler addItemGui = new AddItemHandler();
-        addItemGui.show();
+      //  AddItemHandler addItemGui = new AddItemHandler();
+     //   addItemGui.show();
+     AddItemHandler.main(null);
     }//GEN-LAST:event_addproductButtonActionPerformed
+
+    private void LogouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogouActionPerformed
+        // TODO add your handling code here:
+        CheckUserlogin.LogOut();
+        LoginForm.main(null);
+        dispose();
+    }//GEN-LAST:event_LogouActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +263,9 @@ public class ProductDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Logou;
     private javax.swing.JButton addproductButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -209,5 +278,6 @@ public class ProductDashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel username_label;
     // End of variables declaration//GEN-END:variables
 }
