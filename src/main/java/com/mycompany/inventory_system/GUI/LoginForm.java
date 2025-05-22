@@ -12,6 +12,8 @@ public class LoginForm extends javax.swing.JFrame {
    
     public LoginForm() {
         initComponents();
+        AccountHandler.InitFileLocation();
+        AccountHandler.ReadFile();
     }
 
     
@@ -70,6 +72,11 @@ public class LoginForm extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(80, 200, 120));
         jButton2.setForeground(new java.awt.Color(230, 230, 230));
         jButton2.setText("REGISTER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 119, -1, -1));
         jButton2.getAccessibleContext().setAccessibleName("");
 
@@ -96,7 +103,7 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
+            /*
             String username = userTextF.getText();
             String password = passwordTextF.getText();
             CheckUserlogin checkUserLogin = new CheckUserlogin();
@@ -109,8 +116,27 @@ public class LoginForm extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null,"Wrong Username or Password");
             }
-            
+            */
+            if(CheckUserlogin.Login(userTextF.getText(), passwordTextF.getText()) != 0) {
+                return;
+            } else {
+                ProductDashboard.username = AccountHandler.username;
+                ProductDashboard.main(null);
+                this.dispose();
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //register
+        if(CheckUserlogin.SignUp(userTextF.getText(), passwordTextF.getText()) != 0) {
+                return;
+            } else {
+                ProductDashboard.username = AccountHandler.username;
+                ProductDashboard.main(null);
+                this.dispose();
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
    
     public static void main(String args[]) {
