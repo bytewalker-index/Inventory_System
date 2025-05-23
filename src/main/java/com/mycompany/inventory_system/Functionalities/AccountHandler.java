@@ -38,6 +38,15 @@ public class AccountHandler {
             stream.write('\n');
              stream.write(entry.getValue().getBytes());
             stream.write('\n');
+           int item_count = account_items.get(entry.getKey() + entry.getValue()).size();
+           stream.write(String.valueOf(item_count).getBytes());
+            stream.write('\n');
+           for(Map.Entry<String, Item> entry_items : account_items.get(entry.getKey() + entry.getValue()).entrySet()) {
+            stream.write(entry_items.getKey().getBytes());
+            stream.write('\n');
+            stream.write(String.valueOf(entry_items.getValue().quantity).getBytes());
+            stream.write('\n');
+           }
         }
         stream.write('\n');
         stream.close();
@@ -62,6 +71,16 @@ public class AccountHandler {
            //  System.out.println("value " + value);
             accounts.put(key, value);
             account_items.put(key+value, new HashMap<String, Item>());
+            HashMap<String, Item> map_item = account_items.get(key+value);
+             int item_size = Integer.parseInt(reader.readLine());
+             for(int j = 0; j < item_size; j++) {
+                 String item_name = reader.readLine();
+                 int item_quantity = Integer.parseInt(reader.readLine());
+                 Item item = new Item();
+                 item.name = item_name;
+                 item.quantity = item_quantity;
+                 map_item.put(item_name, item);
+             }
         }
         
         reader.close();

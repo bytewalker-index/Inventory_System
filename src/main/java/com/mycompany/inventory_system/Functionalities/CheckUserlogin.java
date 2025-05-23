@@ -69,6 +69,6 @@ public class CheckUserlogin {
     public static void LogOut() {
         AccountHandler.username = null;
         AccountHandler.password = null;
-        AccountHandler.items = null;
+       // AccountHandler.items = null;
     }
 }
