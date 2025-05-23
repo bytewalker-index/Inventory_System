@@ -7,15 +7,20 @@ import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.RoundedButton;
 import com.mycompany.inventory_system.Tools.RoundedTextField;
 import com.mycompany.inventory_system.Tools.RoundedPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author paul
  */
 public class ProductDashboard extends javax.swing.JFrame {
    public static String username;
+   
+   private DefaultTableModel table_data;
     /**
      * Creates new form ProductDashboard
      */
@@ -53,6 +58,37 @@ public class ProductDashboard extends javax.swing.JFrame {
                 
             }
         });
+      table_data = new DefaultTableModel();
+      table_data.addColumn("Item Name");
+      table_data.addColumn("Item Quantity");
+      jTable1.setModel(table_data);
+      UpdateAllItems();
+      
+      
+      jTable1.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+              /*
+              int row = jTable1.rowAtPoint(e.getPoint());
+              int column = jTable1.columnAtPoint(e.getPoint());
+             if(row >= 0 && column >= 0) {
+               String[] obj = (String[])jTable1.getValueAt(row, column);
+               System.out.println(obj[0]);
+             }
+           */   
+          }
+      });
+    }
+    
+    public void UpdateAllItems() {
+        //jTable1.removeAll();
+        table_data = new DefaultTableModel();
+        table_data.addColumn("Item Name");
+        table_data.addColumn("Item Quantity");
+         for(Map.Entry<String, Item> entry : AccountHandler.items.entrySet()) {
+           table_data.addRow(new Object[]{entry.getKey(), String.valueOf(entry.getValue().quantity)});
+         }
+          jTable1.setModel(table_data);
     }
     
     @Override
@@ -148,7 +184,12 @@ public class ProductDashboard extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(80, 200, 120));
         jButton2.setForeground(new java.awt.Color(230, 230, 230));
-        jButton2.setText("Products");
+        jButton2.setText("Remove Product");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 139, 111, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 160, 480));
@@ -217,7 +258,9 @@ public class ProductDashboard extends javax.swing.JFrame {
        
       //  AddItemHandler addItemGui = new AddItemHandler();
      //   addItemGui.show();
-     AddItemHandler.main(null);
+     AddEditItem.edit = false;
+     AddEditItem.product_dashboard = this;
+     AddEditItem.main(null);
     }//GEN-LAST:event_addproductButtonActionPerformed
 
     private void LogouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogouActionPerformed
@@ -226,6 +269,13 @@ public class ProductDashboard extends javax.swing.JFrame {
         LoginForm.main(null);
         dispose();
     }//GEN-LAST:event_LogouActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //remove
+        RemoveItem.product_dashboard = this;
+        RemoveItem.main(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
