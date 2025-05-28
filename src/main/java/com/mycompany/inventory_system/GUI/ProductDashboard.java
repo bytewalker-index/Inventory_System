@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.inventory_system.GUI;
+import javax.swing.JOptionPane;
 import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.RoundedButton;
 import com.mycompany.inventory_system.Tools.RoundedTextField;
@@ -12,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.*;
+import java.io.*;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -119,11 +121,12 @@ public class ProductDashboard extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         username_label = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel4 = new RoundedPanel(30);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new RoundedTextField(30);
+        SearchProduct = new RoundedTextField(30);
         jButton6 = new RoundedButton("SEARCH",30);
         jLabel1 = new javax.swing.JLabel();
 
@@ -159,11 +162,21 @@ public class ProductDashboard extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(80, 200, 120));
         jButton3.setForeground(new java.awt.Color(230, 230, 230));
         jButton3.setText("Stock Tracking");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 209, 111, -1));
 
         jButton4.setBackground(new java.awt.Color(80, 200, 120));
         jButton4.setForeground(new java.awt.Color(230, 230, 230));
         jButton4.setText("Transactions");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 244, 111, -1));
 
         jButton5.setBackground(new java.awt.Color(80, 200, 120));
@@ -192,6 +205,19 @@ public class ProductDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 139, 111, -1));
 
+        jButton7.setBackground(new java.awt.Color(80, 200, 120));
+        jButton7.setForeground(new java.awt.Color(230, 230, 230));
+        jButton7.setText("Refresh");
+        jButton7.setMaximumSize(new java.awt.Dimension(97, 23));
+        jButton7.setMinimumSize(new java.awt.Dimension(97, 23));
+        jButton7.setPreferredSize(new java.awt.Dimension(97, 23));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 160, 480));
 
         jPanel4.setBackground(new java.awt.Color(44, 47, 51));
@@ -219,13 +245,23 @@ public class ProductDashboard extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 600, 427));
 
-        jTextField1.setBackground(new java.awt.Color(153, 255, 153));
-        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField1.setText("Product...");
-        jTextField1.setToolTipText("Product......");
-        jTextField1.setCaretColor(new java.awt.Color(102, 102, 102));
-        jTextField1.setSelectedTextColor(new java.awt.Color(51, 51, 51));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 18, 490, 43));
+        SearchProduct.setBackground(new java.awt.Color(153, 255, 153));
+        SearchProduct.setForeground(new java.awt.Color(51, 51, 51));
+        SearchProduct.setText("Enter Product Name:");
+        SearchProduct.setToolTipText("Product......");
+        SearchProduct.setCaretColor(new java.awt.Color(102, 102, 102));
+        SearchProduct.setSelectedTextColor(new java.awt.Color(51, 51, 51));
+        SearchProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchProductMouseClicked(evt);
+            }
+        });
+        SearchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchProductActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SearchProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 18, 490, 43));
 
         jButton6.setBackground(new java.awt.Color(80, 200, 120));
         jButton6.setForeground(new java.awt.Color(230, 230, 230));
@@ -247,11 +283,36 @@ public class ProductDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+          
+    String word = SearchProduct.getText().trim().toLowerCase();
+    DefaultTableModel table_data = (DefaultTableModel) jTable1.getModel();
+    table_data.setRowCount(0);
+
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader("data.txt"));
+        List<String> lines = new ArrayList<>();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            lines.add(line.trim());
+        }
+        reader.close();
+
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).toLowerCase().equals(word)) {
+                String quantity = (i + 1 < lines.size()) ? lines.get(i + 1) : "";
+                table_data.addRow(new Object[]{lines.get(i), quantity});
+            }
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error While reading the file" + e.getMessage());
+    }
+       // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Gusto mo ng todo? Eh 'di mag-premium kana. 'Di lahat ng libre, sulit");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void addproductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addproductButtonActionPerformed
@@ -276,6 +337,26 @@ public class ProductDashboard extends javax.swing.JFrame {
         RemoveItem.product_dashboard = this;
         RemoveItem.main(null);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void SearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchProductActionPerformed
+                // TODO add your handling code here:
+    }//GEN-LAST:event_SearchProductActionPerformed
+
+    private void SearchProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchProductMouseClicked
+        SearchProduct.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchProductMouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+           UpdateAllItems();                // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JOptionPane.showMessageDialog(this, "Hindi lahat ng 'click' may kasunod na happy ending - lalo na kung free user ka lang");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JOptionPane.showMessageDialog(this, "Gusto mong maangkin lahat... pero yung 'premium', 'dimo kayang panindigan");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,12 +395,14 @@ public class ProductDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logou;
+    private javax.swing.JTextField SearchProduct;
     private javax.swing.JButton addproductButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -327,7 +410,6 @@ public class ProductDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel username_label;
     // End of variables declaration//GEN-END:variables
 }
