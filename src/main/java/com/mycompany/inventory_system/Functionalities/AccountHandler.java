@@ -6,6 +6,7 @@ package com.mycompany.inventory_system.Functionalities;
 
 import java.util.*;
 import java.io.*;
+import java.time.*;
 import javax.swing.JOptionPane;
 /**
  *
@@ -46,6 +47,17 @@ public class AccountHandler {
             stream.write('\n');
             stream.write(String.valueOf(entry_items.getValue().quantity).getBytes());
             stream.write('\n');
+            stream.write(String.valueOf(entry_items.getValue().manufacture_date).getBytes());
+            stream.write('\n');
+            stream.write(String.valueOf(entry_items.getValue().expiration_date).getBytes());
+            stream.write('\n');
+           }
+            ArrayList<String> records = LogRecorder.account_records.get(entry.getKey() + entry.getValue());
+           stream.write(String.valueOf(records.size()).getBytes());
+           stream.write('\n');
+           for(int i = 0; i < records.size(); i++) {
+               stream.write(records.get(i).getBytes());
+               stream.write('\n');
            }
         }
         stream.write('\n');
@@ -58,6 +70,7 @@ public class AccountHandler {
     public static boolean ReadFile() {
         accounts.clear();
         account_items.clear();
+        LogRecorder.account_records.clear();
         try {
         InputStreamReader stream = new InputStreamReader(new FileInputStream(db_path));
         BufferedReader reader = new BufferedReader(stream);
@@ -76,11 +89,21 @@ public class AccountHandler {
              for(int j = 0; j < item_size; j++) {
                  String item_name = reader.readLine();
                  int item_quantity = Integer.parseInt(reader.readLine());
+                 String manufacture_date = reader.readLine();
+                 String expiration_date = reader.readLine();
                  Item item = new Item();
                  item.name = item_name;
                  item.quantity = item_quantity;
+                 item.manufacture_date = manufacture_date;
+                 item.expiration_date = expiration_date;
                  map_item.put(item_name, item);
              }
+             int record_size = Integer.parseInt(reader.readLine());
+             LogRecorder.account_records.put(key+value, new ArrayList<String>());
+             ArrayList<String> records = LogRecorder.account_records.get(key+value);
+            for(int j = 0; j < record_size; j++) {
+                records.add(reader.readLine());
+            }
         }
         
         reader.close();

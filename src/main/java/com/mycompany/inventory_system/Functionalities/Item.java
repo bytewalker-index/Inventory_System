@@ -11,5 +11,7 @@ package com.mycompany.inventory_system.Functionalities;
 public class Item {
     public String name;
     public int quantity;
+    public String manufacture_date;
+    public String expiration_date;
     public Item() {}
 }

@@ -44,6 +44,7 @@ public class CheckUserlogin {
           AccountHandler.username = username;
           AccountHandler.password = password;
           AccountHandler.items = AccountHandler.account_items.get(username + password);
+          LogRecorder.records = LogRecorder.account_records.get(username + password);
           return 0;
         }
          JOptionPane.showMessageDialog(null,"account does not exist, Maybe you should register first. ");
@@ -58,6 +59,10 @@ public class CheckUserlogin {
           AccountHandler.accounts.put(username, password);
           AccountHandler.account_items.put(username + password, new HashMap<String, Item>());
           AccountHandler.items = AccountHandler.account_items.get(username + password);
+          
+          LogRecorder.account_records.put(username + password, new ArrayList<String>());
+          LogRecorder.records = LogRecorder.account_records.get(username + password);
+          
           AccountHandler.SaveFile();
           return 0;
         }
