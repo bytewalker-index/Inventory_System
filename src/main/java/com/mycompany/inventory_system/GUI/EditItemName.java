@@ -4,6 +4,7 @@
  */
 package com.mycompany.inventory_system.GUI;
 
+
 import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.*;
 import javax.swing.JOptionPane;
@@ -11,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author admin
  */
-public class RemoveItem extends javax.swing.JFrame {
-    public static ProductDashboard product_dashboard;
+public class EditItemName extends javax.swing.JFrame {
+   public static ProductDashboard product_dashboard;
     /**
-     * Creates new form RemoveItem
+     * Creates new form EditItemName
      */
-    public RemoveItem() {
+    public EditItemName() {
         initComponents();
     }
 
@@ -59,7 +60,7 @@ public class RemoveItem extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(80, 180, 120));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("REMOVE");
+        jButton1.setText("Edit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -88,6 +89,10 @@ public class RemoveItem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         /*
         String username = userTextF.getText();
@@ -103,6 +108,7 @@ public class RemoveItem extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Wrong Username or Password");
         }
         */
+      item_name1.getText();
       if(item_name1.getText().equals("")) {
            JOptionPane.showMessageDialog(null,"Empty Name.");
           this.dispose();
@@ -113,19 +119,16 @@ public class RemoveItem extends javax.swing.JFrame {
           this.dispose();
           return;
       }
-      LogRecorder.Record("  [remove item] - " + item_name1.getText());
-      AccountHandler.items.remove(item_name1.getText());
-      product_dashboard.UpdateAllItems();
-      this.dispose();
+      AddEditItem.product_dashboard = product_dashboard;
+      AddEditItem.edit = true;
+      AddEditItem.edit_item_name = item_name1.getText();
+      AddEditItem.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void item_name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_name1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_item_name1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,20 +147,20 @@ public class RemoveItem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RemoveItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditItemName.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RemoveItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditItemName.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RemoveItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditItemName.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RemoveItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditItemName.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RemoveItem().setVisible(true);
+                new EditItemName().setVisible(true);
             }
         });
     }
