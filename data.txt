@@ -1,4 +1,4 @@
-3
+4
 
 
 0
@@ -6,6 +6,13 @@ r
 r
 3
 orange
+2
+banana
+5
+apple
+4
+root
+admin
 2
 banana
 5
