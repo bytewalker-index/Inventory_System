@@ -58,8 +58,8 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2.setText("Password:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 73, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(80, 200, 120));
-        jButton1.setForeground(new java.awt.Color(230, 230, 230));
+        jButton1.setBackground(new java.awt.Color(80, 180, 120));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("LOGIN");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,8 +69,8 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 119, -1, -1));
         jButton1.getAccessibleContext().setAccessibleName("");
 
-        jButton2.setBackground(new java.awt.Color(80, 200, 120));
-        jButton2.setForeground(new java.awt.Color(230, 230, 230));
+        jButton2.setBackground(new java.awt.Color(80, 180, 120));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("REGISTER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

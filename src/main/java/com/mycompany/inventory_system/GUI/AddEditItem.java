@@ -14,21 +14,27 @@ import javax.swing.JOptionPane;
  */
 public class AddEditItem extends javax.swing.JFrame {
     public static boolean edit = false; 
-    public static int edit_item_quantity = 0;
     public static String edit_item_name = null;
     public static ProductDashboard product_dashboard;
+    
+    
+    public boolean warning_change_name = false;
     /**
      * Creates new form AddEditItem
      */
     public AddEditItem() {
         initComponents();
         if(edit) {
-         item_quantity.setText(edit_item_name);
-         item_quantity.setEditable(false);
-         item_quantity.setText(String.valueOf(edit_item_quantity));
+         item_name1.setText(edit_item_name);
+         item_quantity.setText(String.valueOf(AccountHandler.items.get(edit_item_name).quantity));
+         manufacture_date.setText(AccountHandler.items.get(edit_item_name).manufacture_date);
+         expiration_date.setText(AccountHandler.items.get(edit_item_name).expiration_date);
         } else {
          item_quantity.setText("0");
+         manufacture_date.setText("mm/dd/yy");
+         expiration_date.setText("mm/dd/yy");
         }
+        warning_change_name = false;
     }
 
     /**
@@ -44,6 +50,10 @@ public class AddEditItem extends javax.swing.JFrame {
         jPanel2 = new RoundedPanel(35);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        manufacture_date = new javax.swing.JTextField();
+        expiration_date = new javax.swing.JTextField();
         jButton2 = new RoundedButton("LOGIN",20);
         jButton3 = new RoundedButton("LOGIN",20);
         jButton1 = new RoundedButton("LOGIN",20);
@@ -55,7 +65,7 @@ public class AddEditItem extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton4.setBackground(new java.awt.Color(80, 200, 120));
+        jButton4.setBackground(new java.awt.Color(80, 180, 120));
         jButton4.setForeground(new java.awt.Color(230, 230, 230));
         jButton4.setText("BACK");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -73,11 +83,35 @@ public class AddEditItem extends javax.swing.JFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 42, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Quantity");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 73, -1, -1));
+        jLabel2.setText("Manufacure Date :");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(80, 200, 120));
-        jButton2.setForeground(new java.awt.Color(230, 230, 230));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Expiration Date : ");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Quantity");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 73, -1, -1));
+
+        manufacture_date.setBackground(new java.awt.Color(182, 176, 159));
+        manufacture_date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manufacture_dateActionPerformed(evt);
+            }
+        });
+        jPanel2.add(manufacture_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, -1));
+
+        expiration_date.setBackground(new java.awt.Color(182, 176, 159));
+        expiration_date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expiration_dateActionPerformed(evt);
+            }
+        });
+        jPanel2.add(expiration_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 110, -1));
+
+        jButton2.setBackground(new java.awt.Color(80, 180, 120));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("-");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,8 +120,8 @@ public class AddEditItem extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 40, -1));
 
-        jButton3.setBackground(new java.awt.Color(80, 200, 120));
-        jButton3.setForeground(new java.awt.Color(230, 230, 230));
+        jButton3.setBackground(new java.awt.Color(80, 180, 120));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("+");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,15 +130,15 @@ public class AddEditItem extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, -1));
 
-        jButton1.setBackground(new java.awt.Color(80, 200, 120));
-        jButton1.setForeground(new java.awt.Color(230, 230, 230));
+        jButton1.setBackground(new java.awt.Color(80, 180, 120));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("DONE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
         item_quantity.setBackground(new java.awt.Color(182, 176, 159));
         item_quantity.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +160,7 @@ public class AddEditItem extends javax.swing.JFrame {
         jLabel3.setText("jLabel3");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 2960, 2250));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 153, 290, 170));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 103, 290, 220));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/inventory_system_images/Untitled design.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -136,20 +170,22 @@ public class AddEditItem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*
-        String username = userTextF.getText();
-        String password = passwordTextF.getText();
-        CheckUserlogin checkUserLogin = new CheckUserlogin();
-        String result = checkUserLogin.checkUser(username,password);
 
-        if (result.equals("correct")){
-            ProductDashboard productD = new ProductDashboard();
-            productD.setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Wrong Username or Password");
+        if(edit) {
+            
+          if(!item_name1.getText().equals(edit_item_name) && !warning_change_name) {
+               JOptionPane.showMessageDialog(null,"Are you sure you want to change name?");
+              warning_change_name = true;
+              return;
+          }
+         
         }
-        */
+        
+        if(warning_change_name) {
+           LogRecorder.Record("  [rename item] - " + edit_item_name + " into " + item_name1.getText());
+          AccountHandler.items.remove(edit_item_name);
+        }
+        
         Item item = new Item();
         item.name = item_name1.getText();
         if(item.name.equals("")) {
@@ -163,6 +199,25 @@ public class AddEditItem extends javax.swing.JFrame {
             item_quantity.setText("0");
             return;
         }
+        
+        //manufacture date and expiration date
+        try {
+        DateChecker.CheckDate(manufacture_date.getText());
+         item.manufacture_date = manufacture_date.getText();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            manufacture_date.setText("mm/dd/yy");
+            return;
+        }
+        try {
+        DateChecker.CheckDate(expiration_date.getText());
+         item.expiration_date = expiration_date.getText();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            expiration_date.setText("mm/dd/yy");
+            return;
+        }
+        if(!edit) LogRecorder.Record("  [add item] - " + item_name1.getText());
       AccountHandler.items.put(item_name1.getText(), item);
       product_dashboard.UpdateAllItems();
       this.dispose();
@@ -210,6 +265,14 @@ public class AddEditItem extends javax.swing.JFrame {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void manufacture_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manufacture_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manufacture_dateActionPerformed
+
+    private void expiration_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expiration_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expiration_dateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +309,7 @@ public class AddEditItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField expiration_date;
     private javax.swing.JTextField item_name1;
     private javax.swing.JTextField item_quantity;
     private javax.swing.JButton jButton1;
@@ -256,6 +320,9 @@ public class AddEditItem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField manufacture_date;
     // End of variables declaration//GEN-END:variables
 }
