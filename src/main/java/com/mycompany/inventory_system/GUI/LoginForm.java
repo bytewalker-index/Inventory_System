@@ -3,6 +3,9 @@ package com.mycompany.inventory_system.GUI;
 
 import com.mycompany.inventory_system.Tools.*;
 import com.mycompany.inventory_system.Functionalities.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
@@ -12,6 +15,11 @@ public class LoginForm extends javax.swing.JFrame {
    
     public LoginForm() {
         initComponents();
+        
+        java.net.URL imageUrl = getClass().getResource("/com/mycompany/inventory_system_images/Logo.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
+            this.setIconImage(icon);
+   
         AccountHandler.InitFileLocation();
         AccountHandler.ReadFile();
     }
@@ -33,7 +41,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inventory_System");
+        setTitle("InvenTra");
         setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         setForeground(java.awt.Color.white);
         setMaximumSize(new java.awt.Dimension(400, 300));
@@ -50,16 +58,16 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(44, 47, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Username:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 42, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Password:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 73, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(80, 180, 120));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("LOGIN");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +78,7 @@ public class LoginForm extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleName("");
 
         jButton2.setBackground(new java.awt.Color(80, 180, 120));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("REGISTER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

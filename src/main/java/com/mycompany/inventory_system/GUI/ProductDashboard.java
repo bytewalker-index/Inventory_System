@@ -8,12 +8,15 @@ import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.RoundedButton;
 import com.mycompany.inventory_system.Tools.RoundedTextField;
 import com.mycompany.inventory_system.Tools.RoundedPanel;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.*;
 import java.io.*;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -28,6 +31,10 @@ public class ProductDashboard extends javax.swing.JFrame {
      */
     public ProductDashboard() {
         initComponents();
+   java.net.URL imageUrl = getClass().getResource("/com/mycompany/inventory_system_images/Logo.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
+            this.setIconImage(icon);
+            
         username_label.setText("Username : " + username);
         this.addWindowListener(new WindowListener() {
            @Override 
@@ -134,6 +141,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("InvenTra");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(24, 26, 27));
@@ -143,7 +151,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Logou.setBackground(new java.awt.Color(80, 180, 120));
-        Logou.setForeground(new java.awt.Color(255, 255, 255));
+        Logou.setForeground(new java.awt.Color(0, 0, 0));
         Logou.setText("Logout");
         Logou.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +161,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.add(Logou, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 111, -1));
 
         addproductButton.setBackground(new java.awt.Color(80, 180, 120));
-        addproductButton.setForeground(new java.awt.Color(255, 255, 255));
+        addproductButton.setForeground(new java.awt.Color(0, 0, 0));
         addproductButton.setText("Add Product");
         addproductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +171,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.add(addproductButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 111, -1));
 
         jButton5.setBackground(new java.awt.Color(80, 180, 120));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Reports & Logs");
         jButton5.setMaximumSize(new java.awt.Dimension(97, 23));
         jButton5.setMinimumSize(new java.awt.Dimension(97, 23));
@@ -179,7 +187,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.add(username_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(80, 180, 120));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Remove Product");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +197,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 111, -1));
 
         jButton7.setBackground(new java.awt.Color(80, 180, 120));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Refresh");
         jButton7.setMaximumSize(new java.awt.Dimension(97, 23));
         jButton7.setMinimumSize(new java.awt.Dimension(97, 23));
@@ -202,7 +210,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, -1));
 
         edit_product.setBackground(new java.awt.Color(80, 180, 120));
-        edit_product.setForeground(new java.awt.Color(255, 255, 255));
+        edit_product.setForeground(new java.awt.Color(0, 0, 0));
         edit_product.setText("Edit Product");
         edit_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +265,7 @@ public class ProductDashboard extends javax.swing.JFrame {
         jPanel1.add(SearchProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 18, 490, 43));
 
         jButton6.setBackground(new java.awt.Color(80, 180, 120));
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Search");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

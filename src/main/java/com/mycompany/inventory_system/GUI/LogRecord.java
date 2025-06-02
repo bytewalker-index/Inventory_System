@@ -5,6 +5,9 @@
 package com.mycompany.inventory_system.GUI;
 
 import com.mycompany.inventory_system.Functionalities.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,6 +19,10 @@ public class LogRecord extends javax.swing.JFrame {
      */
     public LogRecord() {
         initComponents();
+   java.net.URL imageUrl = getClass().getResource("/com/mycompany/inventory_system_images/Logo.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
+            this.setIconImage(icon);
+            
         jTextArea1.setEditable(false);
           StringBuffer buffer = new StringBuffer();
          //   LogRecorder.records = LogRecorder.account_records.get(AccountHandler.username + AccountHandler.password);
@@ -41,6 +48,7 @@ public class LogRecord extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("InvenTra");
 
         jTextArea1.setBackground(new java.awt.Color(193, 230, 193));
         jTextArea1.setColumns(20);

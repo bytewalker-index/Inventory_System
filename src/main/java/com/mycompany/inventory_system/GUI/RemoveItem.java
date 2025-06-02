@@ -6,6 +6,9 @@ package com.mycompany.inventory_system.GUI;
 
 import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 /**
  *
@@ -18,6 +21,10 @@ public class RemoveItem extends javax.swing.JFrame {
      */
     public RemoveItem() {
         initComponents();
+   java.net.URL imageUrl = getClass().getResource("/com/mycompany/inventory_system_images/Logo.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
+            this.setIconImage(icon);
+            
     }
 
     /**
@@ -38,6 +45,7 @@ public class RemoveItem extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("InvenTra");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setBackground(new java.awt.Color(80, 180, 120));

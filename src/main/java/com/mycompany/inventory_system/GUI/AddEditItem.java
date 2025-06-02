@@ -6,7 +6,11 @@ package com.mycompany.inventory_system.GUI;
 
 import com.mycompany.inventory_system.Functionalities.*;
 import com.mycompany.inventory_system.Tools.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -24,6 +28,10 @@ public class AddEditItem extends javax.swing.JFrame {
      */
     public AddEditItem() {
         initComponents();
+   java.net.URL imageUrl = getClass().getResource("/com/mycompany/inventory_system_images/Logo.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
+            this.setIconImage(icon);
+            
         if(edit) {
          item_name1.setText(edit_item_name);
          item_quantity.setText(String.valueOf(AccountHandler.items.get(edit_item_name).quantity));
@@ -63,6 +71,7 @@ public class AddEditItem extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("InvenTra");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setBackground(new java.awt.Color(80, 180, 120));
